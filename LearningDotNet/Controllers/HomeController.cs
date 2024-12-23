@@ -87,7 +87,6 @@ namespace LearningDotNet.Controllers
                     TempData["msg"] = "Admin didn't Approved yet! Please contect your Admin";
                     return RedirectToAction("Index");
                 }
-              
             }
             TempData["msg"] = "Invalid login attempt";
             return RedirectToAction("Index");
