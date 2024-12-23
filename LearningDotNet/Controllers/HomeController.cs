@@ -16,7 +16,7 @@ namespace LearningDotNet.Controllers
         {
             return View();
         }
-
+        // POST: Home
         [HttpPost]
         public ActionResult UserRegister(Register1 obj)
         {
