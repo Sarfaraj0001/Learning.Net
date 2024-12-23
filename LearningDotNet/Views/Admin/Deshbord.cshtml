@@ -1,0 +1,24 @@
+﻿
+@if (Session["AdminId"] != null)
+{
+
+    ViewBag.Title = "Deshbord";
+    Layout = "~/Views/Admin_LayoutPage2.cshtml";
+
+    <div class="mt-lg-5 m-lg-5">
+        @if (TempData["msg"] != null)
+        {
+        <div class="alert alert-success ">
+            @TempData["msg"]
+        </div>
+        }
+        <h1>Admin Dashbord</h1>
+        <a href=""> </a>
+    </div>
+}
+else
+{
+    <h1 class="mt-lg-5 m-lg-5">Login First</h1>
+}
+
+

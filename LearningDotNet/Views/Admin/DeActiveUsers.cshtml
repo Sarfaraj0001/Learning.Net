@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "DeActiveUsers";
+    Layout = "~/Views/Admin_LayoutPage2.cshtml";
+}
+
+@model IEnumerable<LearningDotNet.Models.Register>
+
+
+@if (TempData["msg"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["msg"]
+    </div>
+}
+
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Deactive Users</h1>
+    <table class="table table-bordered table-striped">
+        <thead class="table-light">
+            <tr>
+                <th>S.No</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{var count = 0; }
+            @foreach (var item in Model)
+            {
+                count++;
+                <tr>
+                    <td>@count</td>
+                    <td>@item.Username</td>
+                    <td>@item.Email</td>
+                    <td>@item.Status</td>
+                    <td>
+                        <a href="/Admin/UserStatus?id=@item.id&Status=Active" class="btn btn-success btn-sm">Activate</a>
+                        @*<a href="@Url.Action("DeActiveUser", "Admin", new { Id = item.id })" class="btn btn-danger btn-sm">Deactivate</a>*@
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+
