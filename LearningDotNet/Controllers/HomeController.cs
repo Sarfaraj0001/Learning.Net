@@ -18,7 +18,7 @@ namespace LearningDotNet.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(Register1 obj)
+        public ActionResult UserRegister(Register1 obj)
         {
             Register obj1 = new Register();
 
