@@ -1,0 +1,136 @@
+﻿@model IEnumerable<LearningDotNet.Models.Register>
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Admin_LayoutPage2.cshtml";
+}
+
+<div class="page-wrapper">
+
+    <!-- Page Content-->
+    <div class="page-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-title-box d-md-flex justify-content-md-between align-items-center">
+                        <h4 class="page-title">Users</h4>
+                        <div class="">
+                            <ol class="breadcrumb mb-0">
+                                <li class="breadcrumb-item">
+                                    <a href="#">Approx</a>
+                                </li><!--end nav-item-->
+                                <li class="breadcrumb-item active">Users</li>
+                            </ol>
+                        </div>
+                    </div><!--end page-title-box-->
+                </div><!--end col-->
+            </div><!--end row-->
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h4 class="card-title">Users Details</h4>
+                                </div><!--end col-->
+                                <div class="col-auto">
+                                    <button class="btn bg-primary text-white" data-bs-toggle="modal" data-bs-target="#addUser"><i class="fas fa-plus me-1"></i> Add User</button>
+                                </div><!--end col-->
+                            </div><!--end row-->
+                        </div><!--end card-header-->
+                        <div class="card-body pt-0">
+                            <div class="table-responsive">
+                                <table class="table mb-0" id="datatable_1">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Password</th>
+                                            <th>Registered On</th>
+                                            <th>Status</th>
+                                            <th class="text-end">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach(var item in Model) {
+                                        <tr>
+                                            <td class="d-flex align-items-center">
+                                                <div class="d-flex align-items-center">
+                                                    <img src="/assetss/images/users/avatar-1.jpg" class="me-2 thumb-md align-self-center rounded" alt="...">
+                                                    <div class="flex-grow-1 text-truncate">
+                                                        <h6 class="m-0">@item.Username</h6>
+                                                        <p class="fs-12 text-muted mb-0">USA</p>
+                                                    </div><!--end media body-->
+                                                </div>
+                                            </td>
+                                            <td>@item.Email</td>
+                                            <td>@item.Password</td>
+                                            <td>22 August 2024</td>
+
+                                            <td>
+                                                @if (item.Status == "Active")
+                                                {
+                                                    <span class="badge rounded text-success bg-success-subtle">@item.Status</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="badge bg-danger-subtle text-danger fs-11 fw-medium px-2">@item.Status</span>
+                                                }
+                                            </td>
+                                            <td class="text-end">
+                                                @if (item.Status == "Active")
+                                                {
+                                                    <a href="/Admin/UserStatus?id=@item.id&Status=Deactive" class="btn btn-danger btn-sm">Inactive</a>
+                                                }
+                                                else if (item.Status == "Deactive")
+                                                {
+                                                    <a href="/Admin/UserStatus?id=@item.id&Status=Active" class="btn btn-success btn-sm">Active</a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="/Admin/UserStatus?id=@item.id&Status=Active" class="btn btn-success btn-sm">Active</a>
+                                                    <a href="/Admin/UserStatus?id=@item.id&Status=Deactive" class="btn btn-danger btn-sm">Inactive</a>
+                                                }
+                                            </td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- end col -->
+            </div> <!-- end row -->
+
+        </div><!-- container -->
+        <!--Start Rightbar-->
+        <!--Start Footer-->
+
+        <footer class="footer text-center text-sm-start d-print-none">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card mb-0 rounded-bottom-0">
+                            <div class="card-body">
+                                <p class="text-muted mb-0">
+                                    ©
+                                    <script>document.write(new Date().getFullYear())</script>
+                                    Approx
+                                    <span class="text-muted d-none d-sm-inline-block float-end">
+                                        Design with
+                                        <i class="iconoir-heart-solid text-danger align-middle"></i>
+                                        by Mannatthemes
+                                    </span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!--end footer-->
+    </div>
+    <!-- end page content -->
+</div>
+<!-- end page-wrapper -->

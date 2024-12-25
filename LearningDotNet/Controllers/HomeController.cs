@@ -76,14 +76,14 @@ namespace LearningDotNet.Controllers
                     Session["AdminId"] = adminData.id;
                     //Session["UserName"] = userData.Username;
                     //Session["UserStatus"] = userData.Status;
-                    return RedirectToAction("Deshbord", "Admin");
+                    return RedirectToAction("Dashboard", "Admin");
                 }
                 else if (userData != null && userData.Status == "Active")
                 { 
                 TempData["msg"] = "Login successful!";
                 Session["UserId"] = userData.id;
-                Session["UserName"] = userData.Username;
-                Session["UserStatus"] = userData.Status;
+                //Session["UserName"] = userData.Username;
+                //Session["UserStatus"] = userData.Status;
                 return RedirectToAction("Index");
                 }
                

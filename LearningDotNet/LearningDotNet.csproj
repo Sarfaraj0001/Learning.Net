@@ -409,17 +409,16 @@
     <None Include="packages.config" />
     <Content Include="Views\_LayoutPage1.cshtml" />
     <Content Include="Views\Admin_LayoutPage2.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Admin\GetAllUsers.cshtml" />
     <Content Include="Views\Admin\GetUserDetailsForEdit.cshtml" />
     <Content Include="Views\Admin\GetUserImageForEdit.cshtml" />
     <Content Include="Views\Admin\Profile.cshtml" />
-    <Content Include="Views\Admin\Deshbord.cshtml" />
     <Content Include="Views\Admin\Users.cshtml" />
     <Content Include="Views\Admin\Pending.cshtml" />
     <Content Include="Views\Admin\ActivUsers.cshtml" />
     <Content Include="Views\Admin\DeActiveUsers.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Admin\Dashboard.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

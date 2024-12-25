@@ -67,7 +67,7 @@
                             </ul>
                         </div>
                     </div>
-                    @if (Session["UserStatus"] != null && Session["UserStatus"].ToString() == "Active")
+                    @if (Session["UserStatus"] != null)
                     {
                         <div class="user-login text-right col-md-4" style="white-space: nowrap;">
                             <h3 style="display: inline-block; margin-right: 10px; text-decoration: none;"> Usar Name: &nbsp;&nbsp;<b> @Session["UserName"]</b></h3>
@@ -85,9 +85,6 @@
                             </a>
                             <a class="popup-with-form" href="#login-form" style="display: inline-block; margin-right: 10px; text-decoration: none;">
                                 <i class="fas fa-user"></i> Login
-                            </a>
-                            <a href="/Admin/Index" style="display: inline-block; text-decoration: none;">
-                                <i class="fas fa-user"></i> Admin Login
                             </a>
                         </div>
                     }

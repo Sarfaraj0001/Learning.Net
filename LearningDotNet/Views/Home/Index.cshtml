@@ -4,7 +4,12 @@
     Layout = "~/Views/_LayoutPage1.cshtml";
 }
 
-
+@if (TempData["msg"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["msg"]
+    </div>
+}
 
 <!-- Start Login Form
  ============================================= -->
@@ -150,12 +155,6 @@
     </div>
     <div class="col-md-8 login-custom">
         <h4>Register a new account</h4>
-        @if (TempData["msg"] != null)
-        {
-            <div class="alert alert-success">
-                @TempData["msg"]
-            </div>
-        }
         <div class="col-md-12">
             <div class="row">
                 <div class="form-group">
@@ -234,14 +233,9 @@
 <!-- End Register Form -->
 <!-- Start Banner
 ============================================= -->
+
 <div class="banner-area content-top-heading less-paragraph text-normal">
     <div id="bootcarousel" class="carousel slide animate_text carousel-fade" data-ride="carousel">
-        @if (TempData["msg"] != null)
-        {
-            <div class="alert alert-success">
-                @TempData["msg"]
-            </div>
-        }
         <!-- Wrapper for slides -->
         <div class="carousel-inner text-light carousel-zoom">
             <div class="item active">

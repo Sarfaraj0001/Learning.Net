@@ -12,13 +12,6 @@ namespace LearningDotNet.Controllers
     public class AdminController : Controller
     {
         LearningDotNetEntities db = new LearningDotNetEntities();
-        // GET: Admin
-
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         public ActionResult AdminLogin(Admin obj)
         {
             var data = db.Admins.FirstOrDefault(u => u.UserName == obj.UserName && u.Password == obj.Password);
@@ -30,20 +23,24 @@ namespace LearningDotNet.Controllers
             TempData["msg"] = "Login Successful";
 
             //Session["AdminId"] = data.id;    
-            return RedirectToAction("Deshbord");
+            return RedirectToAction("Dashboard");
         }
         public ActionResult AdminLogout()
         {
             // Clear the session
             Session["AdminId"] = null;
             TempData["msg"] = "You have been logged out successfully!";
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
 
-        public ActionResult Deshbord()
+        public ActionResult Dashboard()
         {
-          
-            return View();
+            if (Session["AdminId"] != null)
+            {
+                var data = db.Registers.ToList();
+                return View(data);
+            }
+            return RedirectToAction("Index");
         }
 
         public ActionResult Users(Register obj)
@@ -116,21 +113,6 @@ namespace LearningDotNet.Controllers
             }       
         }
 
-        //public ActionResult DeActiveUser(int Id)
-        //{
-        //    var data = db.Registers.Where(x => x.id == Id).FirstOrDefault();
-
-        //    if(data != null) 
-        //    { 
-        //    data.Status = "Deactive";
-        //    db.Entry(data).State = EntityState.Modified;
-        //    db.SaveChanges();
-        //        Session["UserId"] = null;
-        //        Session["UserName"] = null;
-        //        Session["UserStatus"] = null;
-        //    }
-        //    return RedirectToAction("Users");
-        //}
 
 
 
