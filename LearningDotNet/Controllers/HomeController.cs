@@ -30,26 +30,29 @@ namespace LearningDotNet.Controllers
                     return RedirectToAction("Index");
                 }
 
-                if (db.Registers.Any(u => u.Username == obj.Username))
+                else if (db.Registers.Any(u => u.Username == obj.Username))
                 {
-                    TempData["msg"] = "UserName already exist";
+                    TempData["msg"] = "Username already exist";
                     return RedirectToAction("Index");
                 }
 
-                if (obj.Password != obj.ConfPassword)
+                else if (obj.Password != obj.ConfPassword)
                 {
                     TempData["msg"] = "Password Not Match";
                     return RedirectToAction("Index");
                 }
-                obj1.Email = obj.Email;
-                obj1.Password = obj.Password;
-                obj1.Username = obj.Username;
-                obj1.Status = obj.Status;
-                obj1.Status = "Pending";
-                db.Registers.Add(obj1);
+                else { 
+                    obj1.Email = obj.Email;
+                    obj1.Username = obj.Username;
+                    obj1.Password = obj.Password;
+                    obj1.Registered_On = DateTime.Now;
+                    obj1.Status = obj.Status;               
+                    obj1.Status = "Pending";
+                    db.Registers.Add(obj1);
                     db.SaveChanges();
-                TempData["msg"] = "Registration Successfull";
-                return RedirectToAction("Index", "Home");
+                    TempData["msg"] = "Registration Successfull";
+                    return RedirectToAction("Index");
+                }
             }
             return RedirectToAction("Index");
         }

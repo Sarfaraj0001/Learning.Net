@@ -40,7 +40,7 @@ namespace LearningDotNet.Controllers
                 var data = db.Registers.ToList();
                 return View(data);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Users(Register obj)
@@ -50,7 +50,7 @@ namespace LearningDotNet.Controllers
                 var data = db.Registers.ToList();
                 return View(data);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Pending(Register obj)
@@ -61,7 +61,7 @@ namespace LearningDotNet.Controllers
 
                 return View(data);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult ActivUsers(Register obj)
@@ -72,7 +72,7 @@ namespace LearningDotNet.Controllers
 
                 return View(data);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult DeActiveUsers(Register obj)
@@ -83,34 +83,38 @@ namespace LearningDotNet.Controllers
 
                 return View(data);
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult UserStatus(int Id, string Status)
         {
-            var data = db.Registers.Where(x => x.id == Id).FirstOrDefault();
-            if(data == null)
+            if (Session["AdminId"] != null)
             {
-                TempData["msg"] = "id did not match!";
-                return RedirectToAction("Users");
+                var data = db.Registers.Where(x => x.id == Id).FirstOrDefault();
+                if (data == null)
+                {
+                    TempData["msg"] = "id did not match!";
+                    return RedirectToAction("Dashboard");
+                }
+                if (Status == "Active")
+                {
+                    data.Status = "Active";
+                    db.Entry(data).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("ActivUsers");
+                }
+                else
+                {
+                    data.Status = "Deactive";
+                    db.Entry(data).State = EntityState.Modified;
+                    db.SaveChanges();
+                    Session["UserId"] = null;
+                    Session["UserName"] = null;
+                    Session["UserStatus"] = null;
+                    return RedirectToAction("DeActiveUsers");
+                }
             }
-            if(Status == "Active")
-            {
-                data.Status = "Active";
-                db.Entry(data).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("ActivUsers");
-            }
-            else
-            {
-                data.Status = "Deactive";
-                db.Entry(data).State = EntityState.Modified;
-                db.SaveChanges();
-                Session["UserId"] = null;
-                Session["UserName"] = null;
-                Session["UserStatus"] = null;
-                return RedirectToAction("DeActiveUsers");
-            }       
+            return RedirectToAction("Index", "Home");
         }
 
 
