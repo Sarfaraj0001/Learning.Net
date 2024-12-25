@@ -28,7 +28,8 @@ namespace LearningDotNet.Controllers
                 return RedirectToAction("Index");
             }
             TempData["msg"] = "Login Successful";
-            Session["AdminId"] = data.id;    
+
+            //Session["AdminId"] = data.id;    
             return RedirectToAction("Deshbord");
         }
         public ActionResult AdminLogout()

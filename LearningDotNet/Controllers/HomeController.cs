@@ -55,29 +55,39 @@ namespace LearningDotNet.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(Register obj)
+        public ActionResult Login(Admin obj1, Register obj, string Identifier)
         {
             // Check if the ModelState is valid
             if (ModelState.IsValid)
             {
                 // Check if the email exists in the database
-                var user = db.Registers.FirstOrDefault(u => u.Email == obj.Email && u.Password == obj.Password);
+                var userData = db.Registers.FirstOrDefault(u => u.Email == Identifier && u.Password == obj.Password);
+                var adminData = db.Admins.FirstOrDefault(u => u.UserName == Identifier && u.Password == obj.Password);
 
-                if (user == null)
+                if (userData == null && adminData == null)
                 {
                     TempData["msg"] = "Invalid Email or Password";
                     return RedirectToAction("Index");
                    
                 }
-                else if (user != null && user.Status == "Active")
+                else if (adminData != null)
+                {
+                    TempData["msg"] = "Login successful!";
+                    Session["AdminId"] = adminData.id;
+                    //Session["UserName"] = userData.Username;
+                    //Session["UserStatus"] = userData.Status;
+                    return RedirectToAction("Deshbord", "Admin");
+                }
+                else if (userData != null && userData.Status == "Active")
                 { 
                 TempData["msg"] = "Login successful!";
-                Session["UserId"] = user.id;
-                Session["UserName"] = user.Username;
-                Session["UserStatus"] = user.Status;
+                Session["UserId"] = userData.id;
+                Session["UserName"] = userData.Username;
+                Session["UserStatus"] = userData.Status;
                 return RedirectToAction("Index");
                 }
-                else if (user != null && user.Status == "Deactive")
+               
+                else if (userData != null && userData.Status == "Deactive")
                 {
                     TempData["msg"] = "Admin Rejected your login Approval!";
                     return RedirectToAction("Index");
